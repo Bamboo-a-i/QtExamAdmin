@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginPage</class>
+ <widget class="QWidget" name="LoginPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>600</width>
+    <height>400</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>600</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget
+{
+      border: 0.5px solid white;
+      border-radius: 6px;
+	background-color: rgb(255, 255, 255);
+
+}
+
+QLineEdit {
+border: 1px solid rgb(90,194,198); /* 边框宽度为1px，颜色为#A0A0A0 */
+border-radius: 3px; /* 边框圆角 */
+padding-left: 5px; /* 文本距离左边界有5px */
+background-color: #FFFFFF; /* 背景颜色 */
+color: #000000; /* 文本颜色 */
+selection-background-color: #A0A0A0; /* 选中文本的背景颜色 */
+selection-color: #F2F2F2; /* 选中文本的颜色 */
+font-family: &quot;Microsoft YaHei&quot;; /* 文本字体族 */
+font-size: 10pt; /* 文本字体大小 */
+}
+
+QLineEdit:hover { /* 鼠标悬浮在QLineEdit时的状态 */
+border: 1px solid #298DFF;
+border-radius: 3px;
+background-color: #F2F2F2;
+color: #298DFF;
+selection-background-color: #298DFF;
+selection-color: #F2F2F2;
+}
+
+QLineEdit[echoMode=&quot;2&quot;] { /* QLineEdit有输入掩码时的状态 */
+lineedit-password-character: 9679;
+lineedit-password-mask-delay: 2000;
+}
+
+QLineEdit:disabled { /* QLineEdit在禁用时的状态 */
+border: 1px solid #CDCDCD;
+background-color: #CDCDCD;
+color: #B4B4B4;
+}
+
+QLineEdit:read-only { /* QLineEdit在只读时的状态 */
+background-color: #CDCDCD;
+color: #F2F2F2;
+}
+
+QPushButton {
+border: 0.5px solid white;
+border-radius: 6px;
+background-color: rgb(90,194,198);
+min-width: 80px;
+font-family: &quot;Microsoft YaHei&quot;;
+font-size:11pt;
+font-weight: bold;
+color:white;
+}
+
+QPushButton:hover {
+border: 0.5px solid white;
+border-radius: 6px;
+background-color: #1fab89;
+min-width: 80px;
+font-family: &quot;Microsoft YaHei&quot;;
+font-size:10pt;
+font-weight: bold;
+color:white;
+}
+
+QComboBox{
+	font: 75 11pt &quot;微软雅黑&quot;;
+color:#666666;
+font-size:14px;
+padding: 1px 15px 1px 3px;
+border:1px solid rgba(228,228,228,1);
+border-radius:5px 5px 0px 0px;
+}
+
+QComboBox::drop-down {
+font: 75 11pt &quot;微软雅黑&quot;;
+subcontrol-origin: padding;
+subcontrol-position: top right;
+width: 15px;
+border:none;
+}
+
+QComboBox::down-arrow {
+image: url(:/res/icon/dateDown.png);
+}
+
+QComboBox QAbstractItemView{
+font: 75 11pt &quot;微软雅黑&quot;;
+background:rgba(255,255,255,1);
+border:1px solid rgba(228,228,228,1);
+border-radius:0px 0px 5px 5px;
+font-size:14px;
+outline: 0px;  /*去虚线*/
+}
+
+QComboBox QAbstractItemView::item{
+font: 75 11pt &quot;微软雅黑&quot;;
+height:36px;
+color:#666666;
+padding-left:9px;
+background-color:#FFFFFF;
+}
+
+QComboBox QAbstractItemView::item:hover{ /*悬浮*/
+font: 75 11pt &quot;微软雅黑&quot;;
+background-color:#409CE1;
+color:#ffffff;
+}
+
+QComboBox QAbstractItemView::item:selected{ /*选中*/
+font: 75 11pt &quot;微软雅黑&quot;;
+background-color:#409CE1;
+color:#ffffff;
+}
+QComboBox:on {
+font: 75 11pt &quot;微软雅黑&quot;;
+padding-top: 3px;
+padding-left: 4px;
+}
+QComboBox::down-arrow:on {
+font: 75 11pt &quot;微软雅黑&quot;;
+top: 1px;
+left: 1px;
+}
+
+
+#btnClose, #btnMin {
+      border: 0.5px solid white;
+      border-radius: 3px;
+      background-color: rgb(90,194,198);
+      min-width: 30px;
+	  color:white;
+  }
+#btnClose:hover
+{
+	border: 0.5px solid white;
+      border-radius: 3px;
+      background-color: #1fab89;
+      min-width: 30px;
+	  color:white;
+}
+#btnMin:hover {
+	border: 0.5px solid white;
+      border-radius: 3px;
+      background-color: #1fab89;
+      min-width: 30px;
+	  color:white;
+ }
+
+</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="leftMargin">
+       <number>80</number>
+      </property>
+      <property name="topMargin">
+       <number>15</number>
+      </property>
+      <property name="rightMargin">
+       <number>80</number>
+      </property>
+      <property name="bottomMargin">
+       <number>20</number>
+      </property>
+      <property name="spacing">
+       <number>2</number>
+      </property>
+      <item row="0" column="0" colspan="2">
+       <widget class="QLineEdit" name="lineEditUserid">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei</family>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>用户id/工号</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QLineEdit" name="lineEditPwsd">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei</family>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::DefaultContextMenu</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+        <property name="placeholderText">
+         <string>密码</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QWidget" name="container" native="true">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>20</height>
+         </size>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="scrolltext" name="tipsColumn" native="true"/>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QComboBox" name="comboBox">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>35</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>管理员</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>考务管理员</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QPushButton" name="forgetPswd">
+        <property name="minimumSize">
+         <size>
+          <width>82</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei</family>
+          <pointsize>11</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>忘记密码</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" colspan="2">
+       <widget class="QPushButton" name="btnLogin">
+        <property name="minimumSize">
+         <size>
+          <width>82</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei</family>
+          <pointsize>11</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>登录</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QCheckBox" name="chkRemember">
+        <property name="maximumSize">
+         <size>
+          <width>200</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font/>
+        </property>
+        <property name="text">
+         <string>记住我</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>scrolltext</class>
+   <extends>QWidget</extends>
+   <header location="global">scrolltext.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,1436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainPage</class>
+ <widget class="QMainWindow" name="MainPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1074</width>
+    <height>639</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget
+{
+	background-color: #ffffff;
+}
+
+QToolButton
+{
+	border:none;
+	color: #000000;
+	font: 75 10pt &quot;微软雅黑&quot;;
+}
+
+QToolButton:hover
+{
+	color:#72bbff;
+	font: 75 12pt &quot;微软雅黑&quot;;
+}
+
+
+/* lineedit*/
+QLineEdit {
+border: 1px solid rgb(90,194,198); /* 边框宽度为1px，颜色为#A0A0A0 */
+border-radius: 3px; /* 边框圆角 */
+padding-left: 5px; /* 文本距离左边界有5px */
+background-color: #FFFFFF; /* 背景颜色 */
+color: #000000; /* 文本颜色 */
+selection-background-color: #A0A0A0; /* 选中文本的背景颜色 */
+selection-color: #F2F2F2; /* 选中文本的颜色 */
+font-family: &quot;Microsoft YaHei&quot;; /* 文本字体族 */
+font-size: 10pt; /* 文本字体大小 */
+}
+
+QLineEdit:hover { /* 鼠标悬浮在QLineEdit时的状态 */
+border: 1px solid #298DFF;
+border-radius: 3px;
+background-color: #F2F2F2;
+color: #298DFF;
+selection-background-color: #298DFF;
+selection-color: #F2F2F2;
+}
+
+QLineEdit[echoMode=&quot;2&quot;] { /* QLineEdit有输入掩码时的状态 */
+lineedit-password-character: 9679;
+lineedit-password-mask-delay: 2000;
+}
+
+QLineEdit:disabled { /* QLineEdit在禁用时的状态 */
+border: 1px solid #CDCDCD;
+background-color: #CDCDCD;
+color: #B4B4B4;
+}
+
+QLineEdit:read-only { /* QLineEdit在只读时的状态 */
+background-color: #CDCDCD;
+color: #F2F2F2;
+}
+
+QPushButton {
+border: 0.5px solid white;
+border-radius: 6px;
+background-color: rgb(90,194,198);
+min-width: 80px;
+font-family: &quot;Microsoft YaHei&quot;;
+font-size:11pt;
+font-weight: bold;
+color:white;
+}
+
+QPushButton:hover {
+border: 0.5px solid white;
+border-radius: 6px;
+background-color: #1fab89;
+min-width: 80px;
+font-family: &quot;Microsoft YaHei&quot;;
+font-size:10pt;
+font-weight: bold;
+color:white;
+}
+
+QComboBox{
+	font: 75 11pt &quot;微软雅黑&quot;;
+color:#666666;
+font-size:14px;
+padding: 1px 15px 1px 3px;
+border:1px solid rgba(228,228,228,1);
+border-radius:5px 5px 0px 0px;
+}
+
+QComboBox::drop-down {
+font: 75 11pt &quot;微软雅黑&quot;;
+subcontrol-origin: padding;
+subcontrol-position: top right;
+width: 15px;
+border:none;
+}
+
+QComboBox::down-arrow {
+image: url(:/res/icon/dateDown.png);
+}
+
+QComboBox QAbstractItemView{
+font: 75 11pt &quot;微软雅黑&quot;;
+background:rgba(255,255,255,1);
+border:1px solid rgba(228,228,228,1);
+border-radius:0px 0px 5px 5px;
+font-size:14px;
+outline: 0px;  /*去虚线*/
+}
+
+QComboBox QAbstractItemView::item{
+font: 75 11pt &quot;微软雅黑&quot;;
+height:36px;
+color:#666666;
+padding-left:9px;
+background-color:#FFFFFF;
+}
+
+QComboBox QAbstractItemView::item:hover{ /*悬浮*/
+font: 75 11pt &quot;微软雅黑&quot;;
+background-color:#409CE1;
+color:#ffffff;
+}
+
+QComboBox QAbstractItemView::item:selected{ /*选中*/
+font: 75 11pt &quot;微软雅黑&quot;;
+background-color:#409CE1;
+color:#ffffff;
+}
+QComboBox:on {
+font: 75 11pt &quot;微软雅黑&quot;;
+padding-top: 3px;
+padding-left: 4px;
+}
+QComboBox::down-arrow:on {
+font: 75 11pt &quot;微软雅黑&quot;;
+top: 1px;
+left: 1px;
+}
+
+
+QScrollBar::vertical {
+background:transparent;
+width:8px;
+border:0px;
+}
+
+QScrollBar::handle:vertical {
+background:#3E75FF;
+width:8px;
+}
+
+QScrollBar::add-line:vertical {
+background:none;
+border:none;
+}
+
+QScrollBar::sub-line:vertical {
+background:none;
+border:none;
+}
+
+QScrollBar::add-page:vertical {
+background:transparent;
+border:none;
+}
+
+QScrollBar::sub-page:vertical {
+background:transparent;
+border:none;
+}
+
+QLabel
+{
+	color: rgb(0, 0, 0);
+	font: 75 10pt &quot;微软雅黑&quot;;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_3">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QWidget" name="widgetTitle" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>15</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QWidget" name="widgetTop" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>15</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QToolButton" name="tbtn1">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>主界面</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../icon.qrc">
+              <normaloff>:/res/icon/course_unchecked.png</normaloff>:/res/icon/course_unchecked.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextBesideIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbtn2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>查询中心</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>:/image/main_config.png</normaloff>:/image/main_config.png</iconset>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbtn3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>考试中心</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>:/image/main_data.png</normaloff>:/image/main_data.png</iconset>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbtn4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>用户中心</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>:/image/main_person.png</normaloff>:/image/main_person.png</iconset>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbtn5">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>分析中心</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>:/image/main_exit.png</normaloff>:/image/main_exit.png</iconset>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbtn6">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>设置中心</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>:/image/main_exit.png</normaloff>:/image/main_exit.png</iconset>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextUnderIcon</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="styleSheet">
+       <string notr="true">#pageMain,#pageCourse,#pageExam,#pageQuestions,#pageAnalyse
+{
+	background-color: #F8F8F8;
+}</string>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="pageMain">
+       <property name="styleSheet">
+        <string notr="true">#tBtn1,#tBtn2,#tBtn3,#tBtn4,#tBtn5,#tBtn6
+{
+	color: #000000;
+	font: 75 18pt &quot;微软雅黑&quot;;
+}
+#tBtn1:hover,#tBtn2:hover,#tBtn3:hover,#tBtn4:hover,#tBtn5:hover,#tBtn6:hover
+{
+	color: #3E75FF;
+}</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>2</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QWidget" name="widgetMain" native="true">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_14">
+           <property name="topMargin">
+            <number>80</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QWidget" name="widget1" native="true">
+             <layout class="QGridLayout" name="gridLayout_4">
+              <item row="0" column="0">
+               <widget class="QToolButton" name="tBtn1">
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>学院</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icon.qrc">
+                  <normaloff>:/res/icon/dir.png</normaloff>:/res/icon/dir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>256</width>
+                  <height>256</height>
+                 </size>
+                </property>
+                <property name="autoRepeatDelay">
+                 <number>0</number>
+                </property>
+                <property name="autoRepeatInterval">
+                 <number>0</number>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QWidget" name="widget2" native="true">
+             <layout class="QGridLayout" name="gridLayout_7">
+              <item row="0" column="0">
+               <widget class="QToolButton" name="tBtn2">
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>专 业</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icon.qrc">
+                  <normaloff>:/res/icon/dir1.png</normaloff>:/res/icon/dir1.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>256</width>
+                  <height>256</height>
+                 </size>
+                </property>
+                <property name="autoRepeatDelay">
+                 <number>0</number>
+                </property>
+                <property name="autoRepeatInterval">
+                 <number>0</number>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QWidget" name="widget3" native="true">
+             <layout class="QGridLayout" name="gridLayout_8">
+              <item row="0" column="0">
+               <widget class="QToolButton" name="tBtn3">
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>班 级</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icon.qrc">
+                  <normaloff>:/res/icon/dir2.png</normaloff>:/res/icon/dir2.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>256</width>
+                  <height>256</height>
+                 </size>
+                </property>
+                <property name="autoRepeatDelay">
+                 <number>0</number>
+                </property>
+                <property name="autoRepeatInterval">
+                 <number>0</number>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QWidget" name="widget4" native="true">
+             <layout class="QGridLayout" name="gridLayout_12">
+              <item row="0" column="0">
+               <widget class="QToolButton" name="tBtn4">
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>课 程</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icon.qrc">
+                  <normaloff>:/res/icon/dir3.png</normaloff>:/res/icon/dir3.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>256</width>
+                  <height>256</height>
+                 </size>
+                </property>
+                <property name="autoRepeatDelay">
+                 <number>0</number>
+                </property>
+                <property name="autoRepeatInterval">
+                 <number>0</number>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QWidget" name="widget5" native="true">
+             <layout class="QGridLayout" name="gridLayout_11">
+              <item row="0" column="0">
+               <widget class="QToolButton" name="tBtn5">
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>用 户</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icon.qrc">
+                  <normaloff>:/res/icon/dir4.png</normaloff>:/res/icon/dir4.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>256</width>
+                  <height>256</height>
+                 </size>
+                </property>
+                <property name="autoRepeatDelay">
+                 <number>0</number>
+                </property>
+                <property name="autoRepeatInterval">
+                 <number>0</number>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QWidget" name="widget6" native="true">
+             <layout class="QGridLayout" name="gridLayout_10">
+              <item row="0" column="0">
+               <widget class="QToolButton" name="tBtn6">
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>200</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>考试场地</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icon.qrc">
+                  <normaloff>:/res/icon/dir5.png</normaloff>:/res/icon/dir5.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>256</width>
+                  <height>256</height>
+                 </size>
+                </property>
+                <property name="autoRepeatDelay">
+                 <number>0</number>
+                </property>
+                <property name="autoRepeatInterval">
+                 <number>0</number>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextUnderIcon</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageQueryCenter">
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QWidget" name="widgetQueryCenter" native="true">
+          <property name="styleSheet">
+           <string notr="true">#widgetQueryCenter
+{
+	background-color: #FFFFFF;
+}
+
+#tabQueryCenter,#btnCollegeData,#btnClassData,#btnCurriculumData,#btnMajorData
+{
+	border:none;
+	background-color: #FFFFFF;
+}
+
+#btnCollegeData,#btnClassData,#btnCurriculumData,#btnMajorData
+{
+	color: rgb(0, 0, 0);
+	font: 75 11pt &quot;微软雅黑&quot;;
+}
+#btnCollegeData:hover,#btnClassData:hover,#btnCurriculumData:hover,#btnMajorData:hover{background-color: #cdceff;} 
+
+#btnCollegeData:pressed,#btnClassData:pressed,#btnCurriculumData:hover,#btnMajorData:hover{background-color: #cdceff;}
+
+QLabel
+{
+	font: 75 12pt &quot;微软雅黑&quot;;
+	color:rgb(0, 0, 0);
+}
+</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_15">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QTabWidget" name="tabQueryCenter">
+             <property name="currentIndex">
+              <number>-1</number>
+             </property>
+             <property name="tabsClosable">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageExamCenter">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QWidget" name="widgetExamCenter" native="true">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_13">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QWidget" name="widgetLeftOperation_4" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>130</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>5</number>
+              </property>
+              <property name="topMargin">
+               <number>35</number>
+              </property>
+              <property name="rightMargin">
+               <number>5</number>
+              </property>
+              <item>
+               <widget class="QToolButton" name="tBtnCreateExam">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string> 创建考试</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icon.qrc">
+                  <normaloff>:/res/icon/zadd.png</normaloff>:/res/icon/zadd.png</iconset>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextBesideIcon</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="tBtnAllExam">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string> 所有考试</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icon.qrc">
+                  <normaloff>:/res/icon/all.png</normaloff>:/res/icon/all.png</iconset>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextBesideIcon</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="Line" name="line">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="tBtnExaming">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string> 进行中</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icon.qrc">
+                  <normaloff>:/res/icon/sahlou.png</normaloff>:/res/icon/sahlou.png</iconset>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextBesideIcon</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="tBtnExamNotS">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string> 未开始</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icon.qrc">
+                  <normaloff>:/res/icon/clock.png</normaloff>:/res/icon/clock.png</iconset>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextBesideIcon</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="tBtnExamed">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string> 已结束</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="../icon.qrc">
+                  <normaloff>:/res/icon/sahlou.png</normaloff>:/res/icon/sahlou.png</iconset>
+                </property>
+                <property name="toolButtonStyle">
+                 <enum>Qt::ToolButtonTextBesideIcon</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>417</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QTabWidget" name="tabExamCenter">
+             <property name="minimumSize">
+              <size>
+               <width>120</width>
+               <height>0</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageUserCenter">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QWidget" name="widgetUserCenter" native="true">
+          <property name="styleSheet">
+           <string notr="true">#widgetUserCenter
+{
+	background-color: #FFFFFF;
+}
+
+#tabUserCenter,#btnStudentData,#btnAdminData,#btnTeacherData
+{
+	border:none;
+	background-color: #FFFFFF;
+}
+
+#btnAdminData,#btnStudentData,#btnTeacherData
+{
+	color: rgb(0, 0, 0);
+	font: 75 11pt &quot;微软雅黑&quot;;
+}
+#btnAdminData:hover,#btnStudentData:hover,#btnTeacherData:hover{background-color: #cdceff;} 
+
+#btnAdminData:pressed,#btnStudentData:pressed,#btnTeacherData:hover{background-color: #cdceff;}
+
+QLabel
+{
+	font: 75 12pt &quot;微软雅黑&quot;;
+	color:rgb(0, 0, 0);
+}
+</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QWidget" name="widgetLeftOperation_3" native="true">
+             <property name="maximumSize">
+              <size>
+               <width>110</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_7">
+              <property name="spacing">
+               <number>20</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>35</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QPushButton" name="btnAdminData">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>110</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>管理员数据</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnTeacherData">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>110</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>教师数据</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnStudentData">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>110</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>学生数据</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>417</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QTabWidget" name="tabUserCenter">
+             <property name="currentIndex">
+              <number>-1</number>
+             </property>
+             <property name="tabsClosable">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageQuestions">
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QWidget" name="widgetQuestionsCenter" native="true">
+          <property name="styleSheet">
+           <string notr="true">#widgetQuestionsCenter
+{
+	background-color: #FFFFFF;
+}
+
+#tabwidgetQuestions
+{
+	border:none;
+	background-color: #FFFFFF;
+}
+QLabel
+{
+	font: 75 12pt &quot;微软雅黑&quot;;
+	color:rgb(0, 0, 0);
+}</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <widget class="QWidget" name="widgetLeftOperation_2" native="true">
+             <property name="maximumSize">
+              <size>
+               <width>110</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton
+{
+	border:none;
+	background-color: #FFFFFF;
+}
+
+QPushButton
+{
+	color: rgb(0, 0, 0);
+	font: 75 11pt &quot;微软雅黑&quot;;
+}
+QPushButton:hover{background-color: #cdceff;} 
+
+QPushButton:pressed{background-color: #cdceff;}</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <property name="spacing">
+               <number>20</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>35</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QPushButton" name="btnQuestionsList">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>110</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>题目列表</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnRadioCreation">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>110</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>单选题创编</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnMultipleCreation">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>110</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>多选题创编</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnGapCreation">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>110</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>填空题创编</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnTFCreation">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>110</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>判断题创编</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnShortCreation">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>80</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>110</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>简单题创编</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="verticalSpacer_4">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>417</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QTabWidget" name="tabWidgetQuestions">
+             <property name="tabsClosable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageAnalyse"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../icon.qrc"/>
+ </resources>
+ <connections/>
+</ui>
