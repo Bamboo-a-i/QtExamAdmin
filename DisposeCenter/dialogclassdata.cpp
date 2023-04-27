@@ -25,7 +25,7 @@ void DialogClassData::initDialog()
       ui->comboCollegeName->addItem(iCollege.value());
     }
 
-     QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_id",ui->comboCollegeId->currentText());
+     QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_id",ui->comboCollegeId->currentText(),1);
      QMapIterator<QString, QString> iMajor(majorDataMap);
      while (iMajor.hasNext()) {
        iMajor.next();
@@ -67,7 +67,7 @@ QSqlRecord DialogClassData::getRecordData()
 void DialogClassData::on_comboCollegeName_currentIndexChanged(int index)
 {
     ui->comboCollegeId->setCurrentIndex(index);
-    QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_id",ui->comboCollegeId->currentText());
+    QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_id",ui->comboCollegeId->currentText(),1);
     QMapIterator<QString, QString> iMajor(majorDataMap);
     ui->comboMajorId->clear(); // 清除
     ui->comboMajorName->clear();

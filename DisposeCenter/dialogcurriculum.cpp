@@ -27,7 +27,7 @@ void DialogCurriculum::initDialog()
     }
 
     // 专业
-    QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_id",ui->comboCollegeId->currentText());
+    QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_id",ui->comboCollegeId->currentText(),1);
     QMapIterator<QString, QString> iMajor(majorDataMap);
     while (iMajor.hasNext()) {
         iMajor.next();
@@ -77,7 +77,7 @@ QSqlRecord DialogCurriculum::getRecordData()
 void DialogCurriculum::on_comboCollegeName_currentIndexChanged(int index)
 {
     ui->comboCollegeId->setCurrentIndex(index);
-    QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_id",ui->comboCollegeId->currentText());
+    QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_id",ui->comboCollegeId->currentText(),1);
     QMapIterator<QString, QString> iMajor(majorDataMap);
     ui->comboMajorId->clear(); // 清除
     ui->comboMajorName->clear();

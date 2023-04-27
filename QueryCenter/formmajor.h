@@ -5,6 +5,7 @@
 #include <QSqlQueryModel>
 #include <QSqlTableModel>
 #include <QItemSelectionModel>
+#include <QTreeWidget>
 
 namespace Ui {
 class FormMajor;
@@ -24,7 +25,11 @@ private:
 
 
 private slots:
-    void initForm();
+    void initTable();
+
+    void initTree();
+
+    void showModel(QSqlQueryModel *queryModel);
 
     void on_tBtnAdd_clicked();
 
@@ -40,8 +45,14 @@ private slots:
 
     void on_tableView_clicked(const QModelIndex &index);
 
+    void on_treeWidget_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+
+    void on_tBtnShowAll_clicked();
+
 private:
+
     QSqlQueryModel  *queryModel;  //数据模型
+
     QItemSelectionModel *theSelection; //选择模型
 };
 

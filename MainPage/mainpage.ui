@@ -265,7 +265,7 @@ QLabel
              </sizepolicy>
             </property>
             <property name="text">
-             <string>主界面</string>
+             <string> 主界面</string>
             </property>
             <property name="icon">
              <iconset resource="../icon.qrc">
@@ -337,29 +337,6 @@ QLabel
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>用户中心</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>:/image/main_person.png</normaloff>:/image/main_person.png</iconset>
-            </property>
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonTextUnderIcon</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QToolButton" name="tbtn5">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
-            <property name="text">
              <string>分析中心</string>
             </property>
             <property name="icon">
@@ -372,7 +349,7 @@ QLabel
            </widget>
           </item>
           <item>
-           <widget class="QToolButton" name="tbtn6">
+           <widget class="QToolButton" name="tbtn5">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -422,7 +399,7 @@ QLabel
 }</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="pageMain">
        <property name="styleSheet">
@@ -457,313 +434,199 @@ QLabel
           <property name="styleSheet">
            <string notr="true"/>
           </property>
-          <layout class="QGridLayout" name="gridLayout_14">
+          <layout class="QGridLayout" name="gridLayout_4">
            <property name="topMargin">
             <number>80</number>
            </property>
-           <item row="0" column="0">
-            <widget class="QWidget" name="widget1" native="true">
-             <layout class="QGridLayout" name="gridLayout_4">
-              <item row="0" column="0">
-               <widget class="QToolButton" name="tBtn1">
-                <property name="maximumSize">
-                 <size>
-                  <width>200</width>
-                  <height>200</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>学院</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="../icon.qrc">
-                  <normaloff>:/res/icon/dir.png</normaloff>:/res/icon/dir.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>256</width>
-                  <height>256</height>
-                 </size>
-                </property>
-                <property name="autoRepeatDelay">
-                 <number>0</number>
-                </property>
-                <property name="autoRepeatInterval">
-                 <number>0</number>
-                </property>
-                <property name="toolButtonStyle">
-                 <enum>Qt::ToolButtonTextUnderIcon</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QWidget" name="widget2" native="true">
-             <layout class="QGridLayout" name="gridLayout_7">
-              <item row="0" column="0">
-               <widget class="QToolButton" name="tBtn2">
-                <property name="maximumSize">
-                 <size>
-                  <width>200</width>
-                  <height>200</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>专 业</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="../icon.qrc">
-                  <normaloff>:/res/icon/dir1.png</normaloff>:/res/icon/dir1.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>256</width>
-                  <height>256</height>
-                 </size>
-                </property>
-                <property name="autoRepeatDelay">
-                 <number>0</number>
-                </property>
-                <property name="autoRepeatInterval">
-                 <number>0</number>
-                </property>
-                <property name="toolButtonStyle">
-                 <enum>Qt::ToolButtonTextUnderIcon</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QWidget" name="widget3" native="true">
-             <layout class="QGridLayout" name="gridLayout_8">
-              <item row="0" column="0">
-               <widget class="QToolButton" name="tBtn3">
-                <property name="maximumSize">
-                 <size>
-                  <width>200</width>
-                  <height>200</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>班 级</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="../icon.qrc">
-                  <normaloff>:/res/icon/dir2.png</normaloff>:/res/icon/dir2.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>256</width>
-                  <height>256</height>
-                 </size>
-                </property>
-                <property name="autoRepeatDelay">
-                 <number>0</number>
-                </property>
-                <property name="autoRepeatInterval">
-                 <number>0</number>
-                </property>
-                <property name="toolButtonStyle">
-                 <enum>Qt::ToolButtonTextUnderIcon</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QWidget" name="widget4" native="true">
-             <layout class="QGridLayout" name="gridLayout_12">
-              <item row="0" column="0">
-               <widget class="QToolButton" name="tBtn4">
-                <property name="maximumSize">
-                 <size>
-                  <width>200</width>
-                  <height>200</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>课 程</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="../icon.qrc">
-                  <normaloff>:/res/icon/dir3.png</normaloff>:/res/icon/dir3.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>256</width>
-                  <height>256</height>
-                 </size>
-                </property>
-                <property name="autoRepeatDelay">
-                 <number>0</number>
-                </property>
-                <property name="autoRepeatInterval">
-                 <number>0</number>
-                </property>
-                <property name="toolButtonStyle">
-                 <enum>Qt::ToolButtonTextUnderIcon</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QWidget" name="widget5" native="true">
-             <layout class="QGridLayout" name="gridLayout_11">
-              <item row="0" column="0">
-               <widget class="QToolButton" name="tBtn5">
-                <property name="maximumSize">
-                 <size>
-                  <width>200</width>
-                  <height>200</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>用 户</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="../icon.qrc">
-                  <normaloff>:/res/icon/dir4.png</normaloff>:/res/icon/dir4.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>256</width>
-                  <height>256</height>
-                 </size>
-                </property>
-                <property name="autoRepeatDelay">
-                 <number>0</number>
-                </property>
-                <property name="autoRepeatInterval">
-                 <number>0</number>
-                </property>
-                <property name="toolButtonStyle">
-                 <enum>Qt::ToolButtonTextUnderIcon</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QWidget" name="widget6" native="true">
-             <layout class="QGridLayout" name="gridLayout_10">
-              <item row="0" column="0">
-               <widget class="QToolButton" name="tBtn6">
-                <property name="maximumSize">
-                 <size>
-                  <width>200</width>
-                  <height>200</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>考试场地</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="../icon.qrc">
-                  <normaloff>:/res/icon/dir5.png</normaloff>:/res/icon/dir5.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>256</width>
-                  <height>256</height>
-                 </size>
-                </property>
-                <property name="autoRepeatDelay">
-                 <number>0</number>
-                </property>
-                <property name="autoRepeatInterval">
-                 <number>0</number>
-                </property>
-                <property name="toolButtonStyle">
-                 <enum>Qt::ToolButtonTextUnderIcon</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="pageQueryCenter">
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QWidget" name="widgetQueryCenter" native="true">
-          <property name="styleSheet">
-           <string notr="true">#widgetQueryCenter
-{
-	background-color: #FFFFFF;
-}
-
-#tabQueryCenter,#btnCollegeData,#btnClassData,#btnCurriculumData,#btnMajorData
-{
-	border:none;
-	background-color: #FFFFFF;
-}
-
-#btnCollegeData,#btnClassData,#btnCurriculumData,#btnMajorData
-{
-	color: rgb(0, 0, 0);
-	font: 75 11pt &quot;微软雅黑&quot;;
-}
-#btnCollegeData:hover,#btnClassData:hover,#btnCurriculumData:hover,#btnMajorData:hover{background-color: #cdceff;} 
-
-#btnCollegeData:pressed,#btnClassData:pressed,#btnCurriculumData:hover,#btnMajorData:hover{background-color: #cdceff;}
-
-QLabel
-{
-	font: 75 12pt &quot;微软雅黑&quot;;
-	color:rgb(0, 0, 0);
-}
-</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_15">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item row="0" column="0">
-            <widget class="QTabWidget" name="tabQueryCenter">
-             <property name="currentIndex">
-              <number>-1</number>
+           <item row="3" column="1">
+            <widget class="QToolButton" name="tBtn5">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
              </property>
-             <property name="tabsClosable">
-              <bool>false</bool>
+             <property name="text">
+              <string>用 户</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../icon.qrc">
+               <normaloff>:/res/icon/dir4.png</normaloff>:/res/icon/dir4.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>256</width>
+               <height>256</height>
+              </size>
+             </property>
+             <property name="autoRepeatDelay">
+              <number>0</number>
+             </property>
+             <property name="autoRepeatInterval">
+              <number>0</number>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextUnderIcon</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QToolButton" name="tBtn6">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>考试场地</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../icon.qrc">
+               <normaloff>:/res/icon/dir5.png</normaloff>:/res/icon/dir5.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>256</width>
+               <height>256</height>
+              </size>
+             </property>
+             <property name="autoRepeatDelay">
+              <number>0</number>
+             </property>
+             <property name="autoRepeatInterval">
+              <number>0</number>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextUnderIcon</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QToolButton" name="tBtn3">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>班 级</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../icon.qrc">
+               <normaloff>:/res/icon/dir2.png</normaloff>:/res/icon/dir2.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>256</width>
+               <height>256</height>
+              </size>
+             </property>
+             <property name="autoRepeatDelay">
+              <number>0</number>
+             </property>
+             <property name="autoRepeatInterval">
+              <number>0</number>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextUnderIcon</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QToolButton" name="tBtn1">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>学 院</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../icon.qrc">
+               <normaloff>:/res/icon/dir.png</normaloff>:/res/icon/dir.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>256</width>
+               <height>256</height>
+              </size>
+             </property>
+             <property name="autoRepeatDelay">
+              <number>0</number>
+             </property>
+             <property name="autoRepeatInterval">
+              <number>0</number>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextUnderIcon</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QToolButton" name="tBtn4">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>课 程</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../icon.qrc">
+               <normaloff>:/res/icon/dir3.png</normaloff>:/res/icon/dir3.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>256</width>
+               <height>256</height>
+              </size>
+             </property>
+             <property name="autoRepeatDelay">
+              <number>0</number>
+             </property>
+             <property name="autoRepeatInterval">
+              <number>0</number>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextUnderIcon</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QToolButton" name="tBtn2">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>200</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>专 业</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../icon.qrc">
+               <normaloff>:/res/icon/dir1.png</normaloff>:/res/icon/dir1.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>256</width>
+               <height>256</height>
+              </size>
+             </property>
+             <property name="autoRepeatDelay">
+              <number>0</number>
+             </property>
+             <property name="autoRepeatInterval">
+              <number>0</number>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextUnderIcon</enum>
              </property>
             </widget>
            </item>
@@ -978,6 +841,19 @@ QLabel
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="pageQueryCenter">
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QWidget" name="widgetQueryCenter" native="true">
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="0" column="0">
+            <widget class="QTabWidget" name="tabQueryCenter"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="pageUserCenter">
        <layout class="QGridLayout" name="gridLayout_2">
         <property name="leftMargin">
@@ -998,32 +874,7 @@ QLabel
         <item row="0" column="0">
          <widget class="QWidget" name="widgetUserCenter" native="true">
           <property name="styleSheet">
-           <string notr="true">#widgetUserCenter
-{
-	background-color: #FFFFFF;
-}
-
-#tabUserCenter,#btnStudentData,#btnAdminData,#btnTeacherData
-{
-	border:none;
-	background-color: #FFFFFF;
-}
-
-#btnAdminData,#btnStudentData,#btnTeacherData
-{
-	color: rgb(0, 0, 0);
-	font: 75 11pt &quot;微软雅黑&quot;;
-}
-#btnAdminData:hover,#btnStudentData:hover,#btnTeacherData:hover{background-color: #cdceff;} 
-
-#btnAdminData:pressed,#btnStudentData:pressed,#btnTeacherData:hover{background-color: #cdceff;}
-
-QLabel
-{
-	font: 75 12pt &quot;微软雅黑&quot;;
-	color:rgb(0, 0, 0);
-}
-</string>
+           <string notr="true"/>
           </property>
           <layout class="QGridLayout" name="gridLayout_9">
            <property name="leftMargin">
@@ -1075,7 +926,7 @@ QLabel
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>80</width>
+                  <width>82</width>
                   <height>40</height>
                  </size>
                 </property>
@@ -1100,7 +951,7 @@ QLabel
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>80</width>
+                  <width>82</width>
                   <height>40</height>
                  </size>
                 </property>
@@ -1125,7 +976,7 @@ QLabel
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>80</width>
+                  <width>82</width>
                   <height>40</height>
                  </size>
                 </property>

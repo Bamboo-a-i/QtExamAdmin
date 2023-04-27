@@ -15,7 +15,8 @@ FormMajor::FormMajor(QWidget *parent) :
     ui(new Ui::FormMajor)
 {
     ui->setupUi(this);
-    initForm();
+    initTable();
+    initTree();
 }
 
 FormMajor::~FormMajor()
@@ -25,11 +26,11 @@ FormMajor::~FormMajor()
 
 void FormMajor::refresh()
 {
-    initForm();
+    initTable();
 }
 
-// 初始化页面
-void FormMajor::initForm()
+// 初始化tableview
+void FormMajor::initTable()
 {
     // 表格设置
     ui->tableView->setColumnWidth(0, 80);
@@ -39,15 +40,35 @@ void FormMajor::initForm()
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows); // 选中行
 
     queryModel = SqlManager::getInstance()->majorDataQuery(); // 接受数据
+    showModel(queryModel);
+    theSelection = new QItemSelectionModel(queryModel); // 关联模型
+    ui->tableView->setModel(queryModel); // 数据模型
+    ui->tableView->setSelectionModel(theSelection); //选择模型
+}
+
+// 初始化 treewidget
+void FormMajor::initTree()
+{
+    QMap<QString,QString> collegeDataMap = SqlManager::getInstance()->collegeDataQuery("formmajor");
+
+    QMapIterator<QString,QString> iCollege(collegeDataMap);
+
+    while (iCollege.hasNext()) {
+        iCollege.next();
+        QTreeWidgetItem *item = new QTreeWidgetItem(ui->treeWidget);
+        item->setText(0,iCollege.value());
+        item->setIcon(0,QIcon(":/res/icon/dir1.png"));
+        ui->treeWidget->setCurrentItem(item);
+    }
+}
+
+void FormMajor::showModel(QSqlQueryModel *queryModel)
+{
     queryModel->setHeaderData(0,Qt::Horizontal,tr("专业编号"));
     queryModel->setHeaderData(1,Qt::Horizontal,tr("专业名称"));
     queryModel->setHeaderData(2,Qt::Horizontal,tr("学院编号"));
     queryModel->setHeaderData(3,Qt::Horizontal,tr("学院名称"));
     queryModel->setHeaderData(4,Qt::Horizontal,tr("创建时间"));
-
-    theSelection = new QItemSelectionModel(queryModel); // 关联模型
-    ui->tableView->setModel(queryModel); // 数据模型
-    ui->tableView->setSelectionModel(theSelection); //选择模型
 }
 
 // 添加
@@ -62,14 +83,22 @@ void FormMajor::on_tBtnAdd_clicked()
     if(dlgMD->exec() == QDialog::Accepted)
     {
         QSqlRecord  recData=dlgMD->getRecordData();
-        if(SqlManager::getInstance()->majorDataInsert(recData.value("major_id").toString(),recData.value("major_name").toString(),recData.value("college_id").toString()))
+        if(recData.value("major_id").toString().isEmpty() || recData.value("major_name").toString().isEmpty())
         {
-            QMessageBox::information(this,"提示信息","添加成功",QMessageBox::Ok,QMessageBox::NoButton);
+            QMessageBox::information(this,"提示信息","不能为空",QMessageBox::Ok,QMessageBox::NoButton);
+
         }
         else
         {
-            QMessageBox::information(this, "消息", "数据添加错误,错误信息\n"+queryModel->lastError().text(),
-                                     QMessageBox::Ok,QMessageBox::NoButton);
+            if(SqlManager::getInstance()->majorDataInsert(recData.value("major_id").toString(),recData.value("major_name").toString(),recData.value("college_id").toString()))
+            {
+                QMessageBox::information(this,"提示信息","添加成功",QMessageBox::Ok,QMessageBox::NoButton);
+            }
+            else
+            {
+                QMessageBox::information(this, "消息", "数据添加错误,错误信息\n"+queryModel->lastError().text(),
+                                         QMessageBox::Ok,QMessageBox::NoButton);
+            }
         }
     }
     on_tBtnRefresh_clicked();
@@ -112,9 +141,11 @@ void FormMajor::on_tBtnDelete_clicked()
 // 刷新
 void FormMajor::on_tBtnRefresh_clicked()
 {
-    initForm();
+    queryModel = SqlManager::getInstance()->majorDataQuery("college_name",ui->treeWidget->currentItem()->text(0));
+    showModel(queryModel);
     ui->tBtnEdit->setEnabled(false);
     ui->tBtnDelete->setEnabled(false);
+    ui->tBtnAdd->setEnabled(false);
 }
 
 // 编辑
@@ -137,14 +168,22 @@ void FormMajor::updateRecord(int recNo)
     if(dlgMD->exec() == QDialog::Accepted)
     {
         QSqlRecord  recData=dlgMD->getRecordData();
-        if(SqlManager::getInstance()->majorDateUpdate(strMajorId,recData.value("major_id").toString(),recData.value("major_name").toString(),recData.value("college_id").toString()))
+        if(recData.value("major_id").toString().isEmpty() || recData.value("major_name").toString().isEmpty())
         {
-            QMessageBox::information(this,"提示信息","修改成功",QMessageBox::Ok,QMessageBox::NoButton);
+            QMessageBox::information(this,"提示信息","不能为空",QMessageBox::Ok,QMessageBox::NoButton);
+
         }
         else
         {
-            QMessageBox::information(this, "消息", "数据修改错误,错误信息\n"+queryModel->lastError().text(),
-                                     QMessageBox::Ok,QMessageBox::NoButton);
+            if(SqlManager::getInstance()->majorDateUpdate(strMajorId,recData.value("major_id").toString(),recData.value("major_name").toString(),recData.value("college_id").toString()))
+            {
+                QMessageBox::information(this,"提示信息","修改成功",QMessageBox::Ok,QMessageBox::NoButton);
+            }
+            else
+            {
+                QMessageBox::information(this, "消息", "数据修改错误,错误信息\n"+queryModel->lastError().text(),
+                                         QMessageBox::Ok,QMessageBox::NoButton);
+            }
         }
     }
     on_tBtnRefresh_clicked(); // 刷新
@@ -161,4 +200,18 @@ void FormMajor::on_tableView_clicked(const QModelIndex &index)
     Q_UNUSED(index);
     ui->tBtnEdit->setEnabled(true);
     ui->tBtnDelete->setEnabled(true);
+    ui->tBtnAdd->setEnabled(true);
+}
+
+void FormMajor::on_treeWidget_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
+{
+    Q_UNUSED(previous);
+    queryModel = SqlManager::getInstance()->majorDataQuery("college_name",current->text(0));
+    showModel(queryModel);
+}
+
+void FormMajor::on_tBtnShowAll_clicked()
+{
+    queryModel = SqlManager::getInstance()->majorDataQuery(); // 接受数据
+    showModel(queryModel);
 }

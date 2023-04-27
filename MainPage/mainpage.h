@@ -23,25 +23,15 @@ public:
 private slots:
     void initPage();
 
-    void buttonClick();
+    void tBtnPageClick();
 
-    void on_btnCollegeData_clicked();
-
-    void on_btnClassData_clicked();
-
-    void on_btnCurriculumData_clicked();
-
-    void on_btnMajorData_clicked();
+    void tBtnTabClick();
 
     void on_tabQueryCenter_tabBarClicked(int index);
-
-    void on_btnStudentData_clicked();
 
     void on_tBtnAllExam_clicked();
 
     void on_tBtnCreateExam_clicked();
-
-    void on_tBtn1_clicked();
 
 private:
     Ui::MainPage *ui;

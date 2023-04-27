@@ -13,6 +13,31 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">/*pushbutton */
+QPushButton {
+border: 0.5px solid white;
+border-radius: 6px;
+background-color: rgb(90,194,198);
+min-width: 80px;
+font-family: &quot;Microsoft YaHei&quot;;
+font-size:11pt;
+font-weight: bold;
+color:white;
+}
+
+QPushButton:hover {
+border: 0.5px solid white;
+border-radius: 6px;
+background-color: #1fab89;
+min-width: 80px;
+font-family: &quot;Microsoft YaHei&quot;;
+font-size:10pt;
+font-weight: bold;
+color:white;
+}
+</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0" colspan="2">
     <widget class="QWidget" name="widget" native="true">
@@ -57,5 +82,38 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btnCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>DialogCollegeData</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>185</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>125</x>
+     <y>79</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCommit</sender>
+   <signal>clicked()</signal>
+   <receiver>DialogCollegeData</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>65</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>125</x>
+     <y>79</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

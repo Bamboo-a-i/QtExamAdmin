@@ -43,6 +43,7 @@ void FormCollege::initForm()
     queryModel->setHeaderData(1,Qt::Horizontal,tr("学院名称"));
     queryModel->setHeaderData(2,Qt::Horizontal,tr("创建时间"));
 
+
     theSelection = new QItemSelectionModel(queryModel); // 关联模型
     ui->tableView->setModel(queryModel); // 数据模型
     ui->tableView->setSelectionModel(theSelection); //选择模型
@@ -63,14 +64,22 @@ void FormCollege::on_tBtnAdd_clicked()
     if(dlgCD->exec() == QDialog::Accepted)
     {
         QSqlRecord  recData=dlgCD->getRecordData();
-        if(SqlManager::getInstance()->collegeDataInsert(recData.value("college_id").toString(),recData.value("college_name").toString()))
+        if(recData.value("college_id").toString().isEmpty() || recData.value("college_name").toString().isEmpty())
         {
-            QMessageBox::information(this,"提示信息","添加成功",QMessageBox::Ok,QMessageBox::NoButton);
+            QMessageBox::information(this,"提示信息","不能为空",QMessageBox::Ok,QMessageBox::NoButton);
+
         }
         else
         {
-            QMessageBox::information(this, "消息", "数据添加错误,错误信息\n"+queryModel->lastError().text(),
-                                     QMessageBox::Ok,QMessageBox::NoButton);
+            if(SqlManager::getInstance()->collegeDataInsert(recData.value("college_id").toString(),recData.value("college_name").toString()))
+            {
+                QMessageBox::information(this,"提示信息","添加成功",QMessageBox::Ok,QMessageBox::NoButton);
+            }
+            else
+            {
+                QMessageBox::information(this, "消息", "数据添加错误,错误信息\n"+queryModel->lastError().text(),
+                                         QMessageBox::Ok,QMessageBox::NoButton);
+            }
         }
     }
     on_tBtnRefresh_clicked();
@@ -114,6 +123,7 @@ void FormCollege::on_tBtnDelete_clicked()
 void FormCollege::on_tBtnRefresh_clicked()
 {
     initForm();
+    ui->tBtnAdd->setEnabled(false);
     ui->tBtnEdit->setEnabled(false);
     ui->tBtnDelete->setEnabled(false);
 }
@@ -136,17 +146,26 @@ void FormCollege::updateRecord(int recNo)
     QSqlRecord curRec=queryModel->record(recNo);//获取当前记录,实际为空记录
 
     dlgCD->setUpdateRecord(curRec);
-    if(dlgCD->exec() == QDialog::Accepted)
+    int res = dlgCD->exec();
+    if(res == QDialog::Accepted)
     {
         QSqlRecord  recData=dlgCD->getRecordData();
-        if(SqlManager::getInstance()->collegeDateUpdate(strid,recData.value("college_id").toString(),recData.value("college_name").toString()))
+        if(recData.value("college_id").toString().isEmpty() || recData.value("college_name").toString().isEmpty())
         {
-            QMessageBox::information(this,"提示信息","修改成功",QMessageBox::Ok,QMessageBox::NoButton);
+            QMessageBox::information(this,"提示信息","不能为空",QMessageBox::Ok,QMessageBox::NoButton);
+
         }
         else
         {
-            QMessageBox::information(this, "消息", "数据修改错误,错误信息\n"+queryModel->lastError().text(),
-                                     QMessageBox::Ok,QMessageBox::NoButton);
+            if(SqlManager::getInstance()->collegeDateUpdate(strid,recData.value("college_id").toString(),recData.value("college_name").toString()))
+            {
+                QMessageBox::information(this,"提示信息","修改成功",QMessageBox::Ok,QMessageBox::NoButton);
+            }
+            else
+            {
+                QMessageBox::information(this, "消息", "数据修改错误,错误信息\n"+queryModel->lastError().text(),
+                                         QMessageBox::Ok,QMessageBox::NoButton);
+            }
         }
     }
     on_tBtnRefresh_clicked(); // 刷新
@@ -161,6 +180,7 @@ void FormCollege::on_tableView_doubleClicked(const QModelIndex &index)
 void FormCollege::on_tableView_clicked(const QModelIndex &index)
 {
     Q_UNUSED(index);
+    ui->tBtnAdd->setEnabled(true);
     ui->tBtnEdit->setEnabled(true);
     ui->tBtnDelete->setEnabled(true);
 }

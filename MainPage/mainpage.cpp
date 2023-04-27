@@ -18,15 +18,7 @@ MainPage::~MainPage()
 
 void MainPage::initPage()
 {
-    //设置顶部导航按钮
-    QList<QAbstractButton *> tbtns = ui->widgetTop->findChildren<QAbstractButton *>();
-    foreach (QAbstractButton *btn, tbtns) {
-        btn->setCheckable(true);
-        connect(btn, SIGNAL(clicked()), this, SLOT(buttonClick()));
-    }
-    ui->tbtn1->click(); // 默认主页面
-
-    // page2
+    // tabpage初始化
     formCollege = new FormCollege(this);
     formCollege->setAttribute(Qt::WA_DeleteOnClose); // 关闭时自动删除
     ui->tabQueryCenter->addTab(formCollege,"学院数据");
@@ -43,19 +35,31 @@ void MainPage::initPage()
     formCurriculum->setAttribute(Qt::WA_DeleteOnClose);
     ui->tabQueryCenter->addTab(formCurriculum,"课程数据");
 
-    ui->tabQueryCenter->setVisible(true);
-    ui->tabQueryCenter->setCurrentIndex(0);
-
-    // page4
     fromStudent = new FormStudent(this);
     fromStudent->setAttribute(Qt::WA_DeleteOnClose);
-    ui->tabUserCenter->addTab(fromStudent,"学生数据");
+    ui->tabQueryCenter->addTab(fromStudent,"学生数据");
 
     ui->tabQueryCenter->setVisible(true);
-    ui->tabUserCenter->setCurrentIndex(0);
+
+
+    //设置顶部导航按钮
+    QList<QAbstractButton *> tbtns = ui->widgetTop->findChildren<QAbstractButton *>();
+    foreach (QAbstractButton *btn, tbtns) {
+        btn->setCheckable(true);
+        connect(btn, SIGNAL(clicked()), this, SLOT(tBtnPageClick()));
+    }
+    ui->tbtn1->click(); // 默认主页面
+
+    // 主页tBtn初始化
+    QList<QAbstractButton *> tBtnTabs = ui->widgetMain->findChildren<QAbstractButton *>();
+    foreach (QAbstractButton *tBtn, tBtnTabs) {
+        tBtn->setCheckable(true);
+        connect(tBtn,SIGNAL(clicked()),this,SLOT(tBtnTabClick()));
+    }
+
 }
 
-void MainPage::buttonClick()
+void MainPage::tBtnPageClick()
 {
     QAbstractButton *b = (QAbstractButton *)sender();
     QString name = b->text();
@@ -64,77 +68,70 @@ void MainPage::buttonClick()
     foreach (QAbstractButton *btn, tbtns) {
         btn->setChecked(btn == b);
     }
-
-    if (name == "主界面") {
+    if (name == " 主界面") {
         ui->stackedWidget->setCurrentIndex(0);
     } else if (name == "查询中心") {
         ui->stackedWidget->setCurrentIndex(1);
     } else if (name == "考试中心") {
         ui->stackedWidget->setCurrentIndex(2);
-    } else if (name == "用户中心") {
-        ui->stackedWidget->setCurrentIndex(3);
+        formClass->refresh();
     } else if (name == "分析中心") {
+        ui->stackedWidget->setCurrentIndex(3);
+    } else {
         ui->stackedWidget->setCurrentIndex(4);
     }
+}
+
+// 主页连接tab
+void MainPage::tBtnTabClick()
+{
+    QAbstractButton *b = (QAbstractButton *)sender();
+    QString name = b->text();
+
+    QList<QAbstractButton *> tBtnTabs = ui->widgetMain->findChildren<QAbstractButton *>();
+    foreach (QAbstractButton *tBtn, tBtnTabs) {
+            tBtn->setChecked(tBtn == b);
+    }
+    ui->stackedWidget->setCurrentIndex(1);
+    if (name == "学 院") {
+        ui->tabQueryCenter->setCurrentIndex(0);
+        formCollege->refresh();
+    } else if (name == "专 业") {
+        ui->tabQueryCenter->setCurrentIndex(1);
+        formMajor->refresh();
+    } else if (name == "班 级") {
+        ui->tabQueryCenter->setCurrentIndex(2);
+        formClass->refresh();
+    } else if (name == "课 程") {
+        ui->tabQueryCenter->setCurrentIndex(3);
+        formCurriculum->refresh();
+    } else if (name == "用 户") {
+        ui->tabQueryCenter->setCurrentIndex(4);
+        formCollege->refresh();
+    }
     else{
-        ui->stackedWidget->setCurrentIndex(5);
+        ui->tabQueryCenter->setCurrentIndex(5);
+        formCollege->refresh();
     }
 }
 
-// 学院数据
-void MainPage::on_btnCollegeData_clicked()
-{
-    ui->tabQueryCenter->setCurrentIndex(0);
-    formCollege->refresh();
-}
-
-// 班级数据
-void MainPage::on_btnClassData_clicked()
-{
-    ui->tabQueryCenter->setCurrentIndex(2);
-    formClass->refresh();
-}
-
-// 课程数据
-void MainPage::on_btnCurriculumData_clicked()
-{
-    ui->tabQueryCenter->setCurrentIndex(3);
-    formCurriculum->refresh();
-}
-
-// 专业
-void MainPage::on_btnMajorData_clicked()
-{
-    ui->tabQueryCenter->setCurrentIndex(1);
-    formMajor->refresh();
-}
-
+// 切换时刷新
 void MainPage::on_tabQueryCenter_tabBarClicked(int index)
 {
     qDebug() << index;
     switch (index) {
     case 0:
-        on_btnCollegeData_clicked();
         break;
     case 1:
-        on_btnMajorData_clicked();
         break;
     case 2:
-        on_btnClassData_clicked();
         break;
     case 3:
-        on_btnCurriculumData_clicked();
         break;
     default:
         break;
     }
 }
-
-void MainPage::on_btnStudentData_clicked()
-{
-
-}
-
 
 void MainPage::on_tBtnAllExam_clicked()
 {
@@ -151,8 +148,3 @@ void MainPage::on_tBtnCreateExam_clicked()
     formCE->show();
 }
 
-// 学院
-void MainPage::on_tBtn1_clicked()
-{
-
-}

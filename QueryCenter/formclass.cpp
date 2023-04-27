@@ -83,14 +83,22 @@ void FormClass::on_tBtnAdd_clicked()
     if(dlgCD->exec() == QDialog::Accepted)
     {
         QSqlRecord  recData=dlgCD->getRecordData();
-        if(SqlManager::getInstance()->classDataInsert(recData.value("class_id").toString(),recData.value("class_name").toString(),recData.value("class_grade").toString(),recData.value("major_id").toString(),recData.value("college_id").toString()))
+        if(recData.value("class_id").toString().isEmpty() || recData.value("class_name").toString().isEmpty())
         {
-            QMessageBox::information(this,"提示信息","添加成功",QMessageBox::Ok,QMessageBox::NoButton);
+            QMessageBox::information(this,"提示信息","不能为空",QMessageBox::Ok,QMessageBox::NoButton);
+
         }
         else
         {
-            QMessageBox::information(this, "消息", "数据添加错误,错误信息\n"+queryModel->lastError().text(),
-                                     QMessageBox::Ok,QMessageBox::NoButton);
+            if(SqlManager::getInstance()->classDataInsert(recData.value("class_id").toString(),recData.value("class_name").toString(),recData.value("class_grade").toString(),recData.value("major_id").toString(),recData.value("college_id").toString()))
+            {
+                QMessageBox::information(this,"提示信息","添加成功",QMessageBox::Ok,QMessageBox::NoButton);
+            }
+            else
+            {
+                QMessageBox::information(this, "消息", "数据添加错误,错误信息\n"+queryModel->lastError().text(),
+                                         QMessageBox::Ok,QMessageBox::NoButton);
+            }
         }
     }
     on_tBtnRefresh_clicked();
@@ -159,15 +167,23 @@ void FormClass::updateRecord(int recNo)
     if(dlgCD->exec() == QDialog::Accepted)
     {
         QSqlRecord  recData=dlgCD->getRecordData();
-        if(SqlManager::getInstance()->classDataUpdate(
-                    strClassid,recData.value("class_id").toString(),recData.value("class_name").toString(),recData.value("class_grade").toString(),recData.value("major_id").toString(),recData.value("college_id").toString()))
+        if(recData.value("class_id").toString().isEmpty() || recData.value("class_name").toString().isEmpty())
         {
-            QMessageBox::information(this,"提示信息","修改成功",QMessageBox::Ok,QMessageBox::NoButton);
+            QMessageBox::information(this,"提示信息","不能为空",QMessageBox::Ok,QMessageBox::NoButton);
+
         }
         else
         {
-            QMessageBox::information(this, "消息", "数据修改错误,错误信息\n"+queryModel->lastError().text(),
-                                     QMessageBox::Ok,QMessageBox::NoButton);
+            if(SqlManager::getInstance()->classDataUpdate(
+                        strClassid,recData.value("class_id").toString(),recData.value("class_name").toString(),recData.value("class_grade").toString(),recData.value("major_id").toString(),recData.value("college_id").toString()))
+            {
+                QMessageBox::information(this,"提示信息","修改成功",QMessageBox::Ok,QMessageBox::NoButton);
+            }
+            else
+            {
+                QMessageBox::information(this, "消息", "数据修改错误,错误信息\n"+queryModel->lastError().text(),
+                                         QMessageBox::Ok,QMessageBox::NoButton);
+            }
         }
     }
     on_tBtnRefresh_clicked(); // 刷新

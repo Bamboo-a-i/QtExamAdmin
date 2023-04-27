@@ -52,22 +52,30 @@ QMap<QString, QString> SqlManager::collegeDataQuery(QString where)
     QMap<QString, QString> collegeDdataMap;
     QSqlQuery query("SELECT college_id,college_name FROM college;");
     while (query.next()) {
-//        qDebug() << query.value(0).toString();
         collegeDdataMap.insert(query.value(0).toString(),query.value(1).toString());
     }
     return collegeDdataMap;
 }
 
+
+// major
 QSqlQueryModel *SqlManager::majorDataQuery()
 {
     queryModel->setQuery("SELECT * FROM view_major_info GROUP BY major_id;");
     return  queryModel;
 }
 
-QMap<QString, QString> SqlManager::majorDataQuery(QString condition1,QString para1)
+QSqlQueryModel *SqlManager::majorDataQuery(QString condition1, QString para1)
 {
+    queryModel->setQuery(QString("Select * from view_major_info where `%1` = '%2';").arg(condition1).arg(para1));
+    return queryModel;
+}
+
+QMap<QString, QString> SqlManager::majorDataQuery(QString condition1,QString para1,int mode)
+{
+    Q_UNUSED(mode);
     QMap<QString, QString> majorDdataMap;
-    QSqlQuery query(QString("SELECT major_id,major_name FROM view_class_info where %1 = '%2';").arg(condition1).arg(para1));
+    QSqlQuery query(QString("SELECT * FROM view_major_info where %1 = '%2';").arg(condition1).arg(para1));
     while (query.next()) {
         majorDdataMap.insert(query.value(0).toString(),query.value(1).toString());
     }
@@ -77,12 +85,54 @@ QMap<QString, QString> SqlManager::majorDataQuery(QString condition1,QString par
 QMap<QString, QString> SqlManager::majorDataQuery(QString condition1,QString para1,QString condition2,QString para2)
 {
     QMap<QString, QString> majorDdataMap;
-    qDebug() << QString("SELECT major_id,major_name FROM view_major_info where %1 = '%2' and %3 = '%4';").arg(condition1).arg(para1).arg(condition2).arg(para2);
     QSqlQuery query(QString("SELECT major_id,major_name FROM view_major_info where %1 = '%2' and %3 = '%4';").arg(condition1).arg(para1).arg(condition2).arg(para2));
     while (query.next()) {
         majorDdataMap.insert(query.value(0).toString(),query.value(1).toString());
     }
     return majorDdataMap;
+}
+
+
+// curriculum
+QSqlQueryModel *SqlManager::curriculumDataQuery()
+{
+    queryModel->setQuery(QString("SELECT * FROM view_curriculum_info GROUP BY curriculum_id;"));
+    return queryModel;
+}
+
+// 检测课程是否存在
+bool SqlManager::curriculumExistQuery(QString condition)
+{
+    queryModel->setQuery(QString("select curriculum_id,curriculum_name from curriculum where curriculum_id = '%1';").arg(condition));
+    if(queryModel->rowCount() == 0)
+        return false;
+    else
+        return true;
+}
+
+QSqlQueryModel *SqlManager::curriculumDataQuery(QString condition1, QString para1)
+{
+    qDebug() << QString("SELECT * FROM view_curriculum_info where %1 = '%2';").arg(condition1).arg(para1);
+    queryModel->setQuery(QString("SELECT * FROM view_curriculum_info where %1 = '%2';").arg(condition1).arg(para1));
+    return queryModel;
+}
+
+QSqlQueryModel *SqlManager::curriculumDataQuery(QString condition1, QString para1, QString condition2, QString para2)
+{
+    qDebug() << QString("SELECT * FROM view_curriculum_info where %1 = '%2' and %3 = '%4';").arg(condition1).arg(para1).arg(condition2).arg(para2);
+    queryModel->setQuery(QString("SELECT * FROM view_curriculum_info where %1 = '%2' and %3 = '%4';").arg(condition1).arg(para1).arg(condition2).arg(para2));
+    return queryModel;
+}
+
+QMap<QString, QString> SqlManager::curriculumDataQuery(QString condition1, QString para1, QString condition2, QString para2, int mode)
+{
+    Q_UNUSED(mode);
+    QMap<QString, QString> curriculumDdataMap;
+    QSqlQuery query(QString("SELECT curriculum_id,curriculum_name FROM view_curriculum_info where %1 = '%2' and %3 = '%4';").arg(condition1).arg(para1).arg(condition2).arg(para2));
+    while (query.next()) {
+        curriculumDdataMap.insert(query.value(0).toString(),query.value(1).toString());
+    }
+    return curriculumDdataMap;
 }
 
 QSqlQueryModel *SqlManager::classDataQuery(QString condition1, QString para1, QString condition2, QString para2, QString condition3, QString para3)
@@ -115,18 +165,6 @@ QMap<QString, QString> SqlManager::classDataQuery(QString condition1, QString pa
     return classDdataMap;
 }
 
-QSqlQueryModel *SqlManager::curriculumDataQuery()
-{
-    queryModel->setQuery(QString("SELECT * FROM view_curriculum_info GROUP BY curriculum_id;"));
-    return queryModel;
-}
-
-QSqlQueryModel *SqlManager::curriculumDataQuery(QString condition1, QString para1, QString condition2, QString para2)
-{
-    queryModel->setQuery(QString("SELECT * FROM view_curriculum_info where %1 = '%2' and %3 = '%4';").arg(condition1).arg(para1).arg(condition2).arg(para2));
-    return queryModel;
-}
-
 QSqlQueryModel *SqlManager::classDataQuery()
 {
     queryModel->setQuery("SELECT * FROM view_class_info GROUP BY class_id;");
@@ -153,6 +191,26 @@ QMap<QString, QString> SqlManager::teacherDataQuery(QString condition1, QString 
     return teaDataMap;
 }
 
+bool SqlManager::teacherExistQuery(QString condition1)
+{
+    queryModel->setQuery(QString("select tea_id,tea_name from teacher where tea_id = '%1';").arg(condition1));
+    if(queryModel->rowCount() == 0)
+        return false;
+    else
+        return true;
+}
+
+QMap<QString, QString> SqlManager::examHallDataQuery()
+{
+    // 返回考务人员姓名和考场的一对一关系；
+    QMap<QString, QString> examHDataMap;
+    query->exec(QString("Select examHall_id,examHall_name from view_examHall_info;"));
+    while (query->next()) {
+        examHDataMap.insert(query->value(0).toString(),query->value(1).toString());
+    }
+    return examHDataMap;
+}
+
 QSqlQueryModel *SqlManager::studentDataGroupQuery(QString condition1)
 {
     queryModel->setQuery(QString("select * from view_student_info ORDER BY %1 DESC;").arg(condition1));
@@ -165,11 +223,13 @@ QSqlQueryModel *SqlManager::studentDataQuery(int start, int end)
     return queryModel;
 }
 
+
 QSqlQueryModel *SqlManager::studentDataQuery()
 {
     queryModel->setQuery("select * from view_student_info GROUP BY stu_id;");
     return queryModel;
 }
+
 
 // 登录更新
 void SqlManager::loginUpdate(QString user_id)
@@ -235,8 +295,27 @@ bool SqlManager::curriculumDataInsert(QString curriculum_id, QString curriculum_
 
 bool SqlManager::studentDataInsert(QString stu_id, QString stu_name, QString stu_gender, QString stu_password,QString class_id)
 {
-    qDebug() << QString("insert into student stu_id,stu_name,stu_gender,stu_password,class_id values('%1','%2','%3','%4',%5)").arg(stu_id).arg(stu_name).arg(stu_gender).arg(stu_password).arg(class_id);
     return query->exec(QString("insert into student (stu_id,stu_name,stu_gender,stu_password,class_id) values('%1','%2','%3','%4','%5')").arg(stu_id).arg(stu_name).arg(stu_gender).arg(stu_password).arg(class_id));
+}
+
+bool SqlManager::questionsDataInsert(QString question_id, QString question_type, QString question_tigan, QString question_options, QString question_biaoda, int question_score, QString question_star, QString question_jiexi, QString strTestPId)
+{
+    return query->exec(QString("INSERT INTO questions (question_id,question_type,question_tigan,question_options,question_biaoda,question_score,question_star,question_jiexi,testP_id) "
+                               "value('%1','%2','%3','%4','%5',%6,'%7','%8','%9');").arg(question_id).arg(question_type).arg(question_tigan).arg(question_options).arg(question_biaoda).arg(question_score).arg(question_star).arg(question_jiexi).arg(strTestPId));
+}
+
+bool SqlManager::testPaperDataInsert(QString testP_id, QString testP_name, QString tea_id, QString curriculum_id)
+{
+    qDebug() << QString("INSERT into testpaper (testP_id,testP_name,tea_id,curriculum_id) VALUE('%1','%2','%3','%4');")
+                .arg(testP_id).arg(testP_name).arg(tea_id).arg(curriculum_id);
+    return query->exec(QString("INSERT into testpaper (testP_id,testP_name,tea_id,curriculum_id) VALUE('%1','%2','%3','%4');")
+                       .arg(testP_id).arg(testP_name).arg(tea_id).arg(curriculum_id));
+}
+
+bool SqlManager::examinationDataInsert(QString examination_id, QString examination_name, QString examination_comment, int examination_duration, QString examination_start_time, QString examination_end_time, QString testP_id,QString examH_id)
+{
+    return query->exec(QString("INSERT into examination (examination_id,examination_name,examination_comment,examination_duration,examination_start_time,examination_end_time,testP_id,examH_id) VALUE('%1','%2','%3',%4,'%5','%6','%7','%8');")
+                       .arg(examination_id).arg(examination_name).arg(examination_comment).arg(examination_duration).arg(examination_start_time).arg(examination_end_time).arg(testP_id).arg(examH_id));
 }
 
 // 删除
@@ -283,7 +362,3 @@ bool SqlManager::initConnect()
     return true;
 
 }
-
-
-
-

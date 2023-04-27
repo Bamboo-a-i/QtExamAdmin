@@ -1,5 +1,7 @@
 QT       += core gui
 QT       += sql
+QT       += network widgets
+QT       += axcontainer
 RC_ICONS = admin.ico
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

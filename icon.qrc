@@ -71,5 +71,7 @@
         <file>res/icon/dir3.png</file>
         <file>res/icon/dir4.png</file>
         <file>res/icon/dir5.png</file>
+        <file>res/icon/hasfile.png</file>
+        <file>res/icon/nofile.png</file>
     </qresource>
 </RCC>

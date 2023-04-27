@@ -10,8 +10,8 @@ FormCurriculum::FormCurriculum(QWidget *parent) :
     ui(new Ui::FormCurriculum)
 {
     ui->setupUi(this);
-    initForm();
-    initScreen();
+    initTable();
+    initTree();
 }
 
 FormCurriculum::~FormCurriculum()
@@ -21,11 +21,11 @@ FormCurriculum::~FormCurriculum()
 
 void FormCurriculum::refresh()
 {
-    initForm();
+    initTable();
 }
 
 // 初始化页面
-void FormCurriculum::initForm()
+void FormCurriculum::initTable()
 {
     // 表格设置
     ui->tableView->setColumnWidth(0, 80);
@@ -35,6 +35,81 @@ void FormCurriculum::initForm()
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows); // 选中行
 
     queryModel = SqlManager::getInstance()->curriculumDataQuery(); // 接受数据
+    showModel(queryModel);
+    theSelection = new QItemSelectionModel(queryModel); // 关联模型
+    ui->tableView->setModel(queryModel); // 数据模型
+    ui->tableView->setSelectionModel(theSelection); //选择模型
+}
+
+// 初始化tree
+void FormCurriculum::initTree()
+{
+    QMap<QString,QString> collegeDataMap = SqlManager::getInstance()->collegeDataQuery("formmajor");
+    QMapIterator<QString,QString> iCollege(collegeDataMap);
+    while (iCollege.hasNext()) {
+        iCollege.next();
+        QTreeWidgetItem *item1 = new QTreeWidgetItem(FormCurriculum::itTop);
+        item1->setText(0,iCollege.value());
+        item1->setIcon(0,QIcon(":/res/icon/dir2.png"));
+        ui->treeWidget->addTopLevelItem(item1);
+        QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_name",iCollege.value(),1);
+        QMapIterator<QString,QString> iMajor(majorDataMap);
+        while (iMajor.hasNext()) {
+            iMajor.next();
+            QTreeWidgetItem *item2 = new QTreeWidgetItem(FormCurriculum::itSecond);
+            QMap<QString,QString> curriculumDdataMap = SqlManager::getInstance()->curriculumDataQuery("college_name",item1->text(0),"major_name",iMajor.value(),2);
+            QMapIterator<QString,QString> iCurriculum(curriculumDdataMap);
+            if(!curriculumDdataMap.isEmpty())
+            {
+                item2->setText(0,iMajor.value());
+                item2->setIcon(0,QIcon(":/res/icon/hasfile.png"));
+            }
+            else
+            {
+                item2->setText(0,iMajor.value());
+                item2->setIcon(0,QIcon(":/res/icon/nofile.png"));
+            }
+            item1->addChild(item2);
+        }
+        ui->treeWidget->setCurrentItem(item1);
+    }
+
+}
+
+void FormCurriculum::removeItem(QTreeWidgetItem *item)
+{
+    int count = item->childCount();
+    if(count == 0)//没有子节点，直接删除
+    {
+        delete item;
+        return;
+    }
+
+    for(int i=0; i<count; i++)
+    {
+        QTreeWidgetItem *childItem = item->child(0);//删除子节点
+        removeItem(childItem);
+    }
+    delete item;//最后将自己删除
+    return;
+}
+
+void FormCurriculum::removeAllTreeItem()
+{
+    QTreeWidgetItem *item;
+    item = ui->treeWidget->topLevelItem(0);
+    int topCount =  ui->treeWidget->topLevelItemCount();
+    for(int i =0;i<topCount;i++)
+    {
+        qDebug() << i;
+        qDebug() << item;
+        removeItem(item);
+        item = ui->treeWidget->topLevelItem(0);
+    }
+}
+
+void FormCurriculum::showModel(QSqlQueryModel *queryModel)
+{
     queryModel->setHeaderData(0,Qt::Horizontal,tr("课程编号"));
     queryModel->setHeaderData(1,Qt::Horizontal,tr("课程名称"));
     queryModel->setHeaderData(2,Qt::Horizontal,tr("教师编号"));
@@ -45,27 +120,6 @@ void FormCurriculum::initForm()
     queryModel->setHeaderData(7,Qt::Horizontal,tr("专业名称"));
     queryModel->setHeaderData(8,Qt::Horizontal,tr("班级人数"));
     queryModel->setHeaderData(9,Qt::Horizontal,tr("创建时间"));
-
-    theSelection = new QItemSelectionModel(queryModel); // 关联模型
-    ui->tableView->setModel(queryModel); // 数据模型
-    ui->tableView->setSelectionModel(theSelection); //选择模型
-}
-
-void FormCurriculum::initScreen()
-{
-    QMap<QString,QString> collegeDataMap = SqlManager::getInstance()->collegeDataQuery("formcurriculum");
-    QMapIterator<QString, QString> ic(collegeDataMap);
-    while (ic.hasNext()) {
-      ic.next();
-      ui->comboCollege->addItem(ic.value());
-    }
-
-     QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_name",ui->comboCollege->currentText());
-     QMapIterator<QString, QString> im(majorDataMap);
-     while (im.hasNext()) {
-       im.next();
-       ui->comboMajor->addItem(im.value());
-     }
 }
 
 // 添加
@@ -76,20 +130,28 @@ void FormCurriculum::on_tBtnAdd_clicked()
     dlgCD->setWindowFlags(flags | Qt::MSWindowsFixedSizeDialogHint); //设置对话框固定大小
     QSqlRecord curRec=queryModel->record();//获取当前记录,实际为空记录
     dlgCD->setInsertRecord(curRec);
-    if(dlgCD->exec() == QDialog::Accepted)
+    int res = dlgCD->exec();
+    if(res == QDialog::Accepted)
     {
         QSqlRecord  recData=dlgCD->getRecordData();
-        if(SqlManager::getInstance()->curriculumDataInsert
-                (recData.value("curriculum_id").toString(),recData.value("curriculum_name").toString(),
-                 recData.value("tea_id").toString(),recData.value("major_id").toString(),
-                 recData.value("college_id").toString()))
+        if(recData.value("curriculum_id").toString().isEmpty() || recData.value("curriculum_name").toString().isEmpty())
         {
-            QMessageBox::information(this,"提示信息","添加成功",QMessageBox::Ok,QMessageBox::NoButton);
+            QMessageBox::information(this,"提示信息","不能为空",QMessageBox::Ok,QMessageBox::NoButton);
+
         }
         else
         {
-            QMessageBox::information(this, "消息", "数据添加错误,错误信息\n"+queryModel->lastError().text(),
-                                     QMessageBox::Ok,QMessageBox::NoButton);
+            if(SqlManager::getInstance()->curriculumDataInsert
+                (recData.value("curriculum_id").toString(),recData.value("curriculum_name").toString(),
+                recData.value("tea_id").toString(),recData.value("major_id").toString(),
+                recData.value("college_id").toString()))
+            {
+                QMessageBox::information(this,"提示信息","添加成功",QMessageBox::Ok,QMessageBox::NoButton);
+            }
+            else
+            {
+                QMessageBox::information(this, "消息", "数据添加错误,错误信息\n"+queryModel->lastError().text(),QMessageBox::Ok,QMessageBox::NoButton);
+            }
         }
     }
     on_tBtnRefresh_clicked();
@@ -132,7 +194,21 @@ void FormCurriculum::on_tBtnDelete_clicked()
 // 刷新
 void FormCurriculum::on_tBtnRefresh_clicked()
 {
-    initForm();
+    int itType = ui->treeWidget->currentItem()->type();
+    QString curStr = ui->treeWidget->currentItem()->text(0);
+    if(itType == FormCurriculum::itTop)
+    {
+        queryModel = SqlManager::getInstance()->curriculumDataQuery("college_name",curStr); // 接受数据
+        showModel(queryModel);
+    }
+    else if(itType == FormCurriculum::itSecond)
+    {
+        QTreeWidgetItem *parent = ui->treeWidget->currentItem()->parent();
+        QString strPar = parent->text(0);
+        queryModel = SqlManager::getInstance()->curriculumDataQuery("college_name",strPar,"major_name",curStr); // 接受数据
+        showModel(queryModel);
+    }
+    ui->tBtnAdd->setEnabled(false);
     ui->tBtnEdit->setEnabled(false);
     ui->tBtnDelete->setEnabled(false);
 }
@@ -158,22 +234,31 @@ void FormCurriculum::updateRecord(int recNo)
     if(dlgCD->exec() == QDialog::Accepted)
     {
         QSqlRecord  recData=dlgCD->getRecordData();
-        if(SqlManager::getInstance()->curriculumDataUpdate(
-                    strid,recData.value("curriculum_id").toString(),recData.value("curriculum_name").toString(),
-                    recData.value("tea_id").toString(),recData.value("major_id").toString(),
-                    recData.value("college_id").toString()))
+        if(recData.value("curriculum_id").toString().isEmpty() || recData.value("curriculum_name").toString().isEmpty())
         {
-            QMessageBox::information(this,"提示信息","修改成功",QMessageBox::Ok,QMessageBox::NoButton);
+            QMessageBox::information(this,"提示信息","不能为空",QMessageBox::Ok,QMessageBox::NoButton);
+
         }
         else
         {
-            QMessageBox::information(this, "消息", "数据修改错误,错误信息\n"+queryModel->lastError().text(),
-                                     QMessageBox::Ok,QMessageBox::NoButton);
+            if(SqlManager::getInstance()->curriculumDataUpdate(
+                        strid,recData.value("curriculum_id").toString(),recData.value("curriculum_name").toString(),
+                        recData.value("tea_id").toString(),recData.value("major_id").toString(),
+                        recData.value("college_id").toString()))
+            {
+                QMessageBox::information(this,"提示信息","修改成功",QMessageBox::Ok,QMessageBox::NoButton);
+            }
+            else
+            {
+                QMessageBox::information(this, "消息", "数据修改错误,错误信息\n"+queryModel->lastError().text(),
+                                         QMessageBox::Ok,QMessageBox::NoButton);
+            }
         }
     }
     on_tBtnRefresh_clicked(); // 刷新
 }
 
+// 双击编辑
 void FormCurriculum::on_tableView_doubleClicked(const QModelIndex &index)
 {
     int curRecNo = index.row();
@@ -183,38 +268,33 @@ void FormCurriculum::on_tableView_doubleClicked(const QModelIndex &index)
 void FormCurriculum::on_tableView_clicked(const QModelIndex &index)
 {
     Q_UNUSED(index);
+    ui->tBtnAdd->setEnabled(true);
     ui->tBtnEdit->setEnabled(true);
     ui->tBtnDelete->setEnabled(true);
 }
 
-void FormCurriculum::on_tBtnScreen_clicked()
+// item 变化
+void FormCurriculum::on_treeWidget_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous)
 {
-    queryModel = SqlManager::getInstance()->curriculumDataQuery("college_name",ui->comboCollege->currentText(),"major_name",ui->comboMajor->currentText());
-    // 表格设置
-
-    queryModel->setHeaderData(0,Qt::Horizontal,tr("课程编号"));
-    queryModel->setHeaderData(1,Qt::Horizontal,tr("课程名称"));
-    queryModel->setHeaderData(2,Qt::Horizontal,tr("教师编号"));
-    queryModel->setHeaderData(3,Qt::Horizontal,tr("教师名称"));
-    queryModel->setHeaderData(4,Qt::Horizontal,tr("学院编号"));
-    queryModel->setHeaderData(5,Qt::Horizontal,tr("学院名称"));
-    queryModel->setHeaderData(6,Qt::Horizontal,tr("专业编号"));
-    queryModel->setHeaderData(7,Qt::Horizontal,tr("专业名称"));
-    queryModel->setHeaderData(9,Qt::Horizontal,tr("班级人数"));
-    queryModel->setHeaderData(10,Qt::Horizontal,tr("创建时间"));
-}
-
-void FormCurriculum::on_comboCollege_currentIndexChanged(int index)
-{
-    Q_UNUSED(index);
-    QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_name",ui->comboCollege->currentText());
-    QMapIterator<QString, QString> im(majorDataMap);
-    ui->comboMajor->clear();
-    while (im.hasNext()) {
-      im.next();
-      ui->comboMajor->addItem(im.value());
+    Q_UNUSED(previous);
+    int itType = current->type();
+    QString curStr = current->text(0);
+    if(itType == FormCurriculum::itTop)
+    {
+        queryModel = SqlManager::getInstance()->curriculumDataQuery("college_name",curStr); // 接受数据
+        showModel(queryModel);
+    }
+    else if(itType == FormCurriculum::itSecond)
+    {
+        QTreeWidgetItem *parent = current->parent();
+        QString strPar = parent->text(0);
+        queryModel = SqlManager::getInstance()->curriculumDataQuery("college_name",strPar,"major_name",curStr); // 接受数据
+        showModel(queryModel);
     }
 }
 
-
-
+void FormCurriculum::on_tBtnShowAll_clicked()
+{
+    queryModel = SqlManager::getInstance()->curriculumDataQuery(); // 接受数据
+    showModel(queryModel);
+}

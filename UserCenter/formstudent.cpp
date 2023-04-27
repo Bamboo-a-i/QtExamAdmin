@@ -87,7 +87,7 @@ void FormStudent::initScreen()
     }
 
     // 专业
-    QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_name",ui->comboCollege->currentText());
+    QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_name",ui->comboCollege->currentText(),1);
     QMapIterator<QString, QString> im(majorDataMap);
     while (im.hasNext()) {
         im.next();
@@ -251,7 +251,7 @@ void FormStudent::on_tBtnGroup_clicked()
 void FormStudent::on_comboCollege_currentIndexChanged(int index)
 {
     Q_UNUSED(index);
-    QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_name",ui->comboCollege->currentText());
+    QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_name",ui->comboCollege->currentText(),1);
     QMapIterator<QString, QString> im(majorDataMap);
     ui->comboMajor->clear();
     while (im.hasNext()) {

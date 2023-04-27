@@ -26,7 +26,7 @@ void DialogStudent::initDialog()
       ui->comboCollegeName->addItem(ic.value());
     }
 
-     QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_id",ui->comboCollegeId->currentText());
+     QMap<QString,QString> majorDataMap = SqlManager::getInstance()->majorDataQuery("college_id",ui->comboCollegeId->currentText(),1);
      QMapIterator<QString, QString> im(majorDataMap);
      while (im.hasNext()) {
        im.next();

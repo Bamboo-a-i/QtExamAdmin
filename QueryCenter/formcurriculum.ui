@@ -14,16 +14,12 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#FormCollege
+   <string notr="true">QWidget
 {
 	
 	background-color: #ffffff;
 }
-#widgetTop
-{
-	
-	background-color: #FAFAFA;
-}
+
 
 QToolButton {
 border: none;
@@ -47,11 +43,15 @@ font-weight: bold;
 color:gray;
 }
 
-QTableView
+QTableView,QTreeWidget
 {
 	border:none;
 }
 
+QTreeWidget
+{
+	border-right:2px solid #3E75FF;
+}
 Qlabel
 {
 	color: rgb(255, 0, 0);
@@ -59,26 +59,14 @@ Qlabel
 }</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <property name="leftMargin">
-    <number>10</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>10</number>
-   </property>
-   <property name="bottomMargin">
-    <number>0</number>
-   </property>
-   <property name="spacing">
-    <number>0</number>
-   </property>
-   <item row="2" column="0">
-    <widget class="QTableView" name="tableView"/>
-   </item>
-   <item row="1" column="0">
+   <item row="0" column="0">
     <widget class="QWidget" name="widgetTop" native="true">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>40</height>
+      </size>
+     </property>
      <layout class="QGridLayout" name="gridLayout">
       <property name="leftMargin">
        <number>9</number>
@@ -92,59 +80,6 @@ Qlabel
       <property name="bottomMargin">
        <number>9</number>
       </property>
-      <item row="0" column="9">
-       <widget class="QComboBox" name="comboMajor"/>
-      </item>
-      <item row="0" column="4">
-       <widget class="QToolButton" name="tBtnRefresh">
-        <property name="minimumSize">
-         <size>
-          <width>80</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>70</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>  刷新</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../icon.qrc">
-          <normaloff>:/res/icon/zrefresh.png</normaloff>:/res/icon/zrefresh.png</iconset>
-        </property>
-        <property name="toolButtonStyle">
-         <enum>Qt::ToolButtonTextBesideIcon</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="7">
-       <widget class="QComboBox" name="comboCurriculumGrade">
-        <item>
-         <property name="text">
-          <string>大一</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>大二</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>大三</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>大四</string>
-         </property>
-        </item>
-       </widget>
-      </item>
       <item row="0" column="3">
        <widget class="QToolButton" name="tBtnEdit">
         <property name="enabled">
@@ -174,7 +109,14 @@ Qlabel
         </property>
        </widget>
       </item>
-      <item row="0" column="11">
+      <item row="0" column="8">
+       <widget class="QLabel" name="labelTips">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7">
        <widget class="QToolButton" name="tBtnShowAll">
         <property name="minimumSize">
          <size>
@@ -197,38 +139,6 @@ Qlabel
         </property>
         <property name="toolButtonStyle">
          <enum>Qt::ToolButtonTextBesideIcon</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QToolButton" name="tBtnAdd">
-        <property name="minimumSize">
-         <size>
-          <width>80</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>70</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>  添加</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../icon.qrc">
-          <normaloff>:/res/icon/zadd.png</normaloff>:/res/icon/zadd.png</iconset>
-        </property>
-        <property name="popupMode">
-         <enum>QToolButton::DelayedPopup</enum>
-        </property>
-        <property name="toolButtonStyle">
-         <enum>Qt::ToolButtonTextBesideIcon</enum>
-        </property>
-        <property name="arrowType">
-         <enum>Qt::NoArrow</enum>
         </property>
        </widget>
       </item>
@@ -261,41 +171,8 @@ Qlabel
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="12">
-       <widget class="QLabel" name="labelTips">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="13">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="8">
-       <widget class="QComboBox" name="comboCollege"/>
-      </item>
-      <item row="0" column="10">
-       <widget class="QToolButton" name="tBtnScreen">
+      <item row="0" column="4">
+       <widget class="QToolButton" name="tBtnRefresh">
         <property name="minimumSize">
          <size>
           <width>80</width>
@@ -309,18 +186,101 @@ Qlabel
          </size>
         </property>
         <property name="text">
-         <string>  筛选</string>
+         <string>  刷新</string>
         </property>
         <property name="icon">
          <iconset resource="../icon.qrc">
-          <normaloff>:/res/icon/screen.png</normaloff>:/res/icon/screen.png</iconset>
+          <normaloff>:/res/icon/zrefresh.png</normaloff>:/res/icon/zrefresh.png</iconset>
         </property>
         <property name="toolButtonStyle">
          <enum>Qt::ToolButtonTextBesideIcon</enum>
         </property>
        </widget>
       </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QToolButton" name="tBtnAdd">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>70</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>  添加</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../icon.qrc">
+          <normaloff>:/res/icon/zadd.png</normaloff>:/res/icon/zadd.png</iconset>
+        </property>
+        <property name="popupMode">
+         <enum>QToolButton::DelayedPopup</enum>
+        </property>
+        <property name="toolButtonStyle">
+         <enum>Qt::ToolButtonTextBesideIcon</enum>
+        </property>
+        <property name="arrowType">
+         <enum>Qt::NoArrow</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="9">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
      </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QTreeWidget" name="treeWidget">
+      <property name="maximumSize">
+       <size>
+        <width>200</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <column>
+       <property name="text">
+        <string>课程列表</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../icon.qrc">
+         <normaloff>:/res/icon/dir2.png</normaloff>:/res/icon/dir2.png</iconset>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTableView" name="tableView"/>
     </widget>
    </item>
   </layout>

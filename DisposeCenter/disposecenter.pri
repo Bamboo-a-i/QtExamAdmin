@@ -10,7 +10,8 @@ HEADERS += \
     $$PWD/dialogcollegedata.h \
     $$PWD/dialogcurriculum.h \
     $$PWD/dialogmajordata.h \
-    $$PWD/dialogstudent.h
+    $$PWD/dialogstudent.h \
+
 
 SOURCES += \
     $$PWD/dialogclassdata.cpp \
@@ -18,3 +19,4 @@ SOURCES += \
     $$PWD/dialogcurriculum.cpp \
     $$PWD/dialogmajordata.cpp \
     $$PWD/dialogstudent.cpp
+

@@ -21,10 +21,6 @@ public:
 
     QSqlRecord  getRecordData();//获取录入的数据
 
-private slots:
-    void on_btnCommit_clicked();
-
-    void on_btnCancel_clicked();
 private:
     QSqlRecord  mRecord; //保存一条记录的数据
 private:

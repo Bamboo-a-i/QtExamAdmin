@@ -33,13 +33,3 @@ QSqlRecord DialogCollegeData::getRecordData()
     mRecord.setValue("college_name",ui->leCollegeName->text());
     return mRecord;
 }
-
-void DialogCollegeData::on_btnCommit_clicked()
-{
-    this->accept();
-}
-
-void DialogCollegeData::on_btnCancel_clicked()
-{
-    this->reject();
-}

@@ -5,6 +5,7 @@
 #include <QSqlQueryModel>
 #include <QSqlTableModel>
 #include <QItemSelectionModel>
+#include <QTreeWidgetItem>
 
 namespace Ui {
 class FormCurriculum;
@@ -20,10 +21,21 @@ public:
     ~FormCurriculum();
 
 private:
+    enum treeItemtype{itTop = 1001,itSecond,itThird};
+
     Ui::FormCurriculum *ui;
 
 private slots:
-    void initForm();
+
+    void initTable();
+
+    void initTree();
+
+    void removeItem(QTreeWidgetItem *item);
+
+    void removeAllTreeItem();
+
+    void showModel(QSqlQueryModel *queryModel);
 
     void on_tBtnAdd_clicked();
 
@@ -39,11 +51,14 @@ private slots:
 
     void on_tableView_clicked(const QModelIndex &index);
 
-    void on_tBtnScreen_clicked();
 
-    void initScreen();
+//    void on_tBtnScreen_clicked();
 
-    void on_comboCollege_currentIndexChanged(int index);
+//    void on_comboCollege_currentIndexChanged(int index);
+
+    void on_treeWidget_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous);
+
+    void on_tBtnShowAll_clicked();
 
 private:
     QSqlQueryModel  *queryModel;  //数据模型
